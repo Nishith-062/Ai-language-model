@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+requests
+transformers
+torch
+openai
+pyttsx3   # or gTTS
+python-multipart
