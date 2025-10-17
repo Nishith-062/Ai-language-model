@@ -20,12 +20,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    language: { type: String, default: "English" },
-    progress: {
-      level: { type: Number, default: 1 },
-      streak: { type: Number, default: 0 },
-      accuracy: { type: Number, default: 0 },
-    },
+    selected_lang: { type: mongoose.Schema.Types.ObjectId, ref: "Language" },
+    level: { type: Number, default: 1 },
+    current_exp: { type: Number, default: 0 },
+    streak_count: { type: Number, default: 0 },
+    proficiency_level: { type: String, enum: ["Beginner", "Intermediate", "Advanced"], default: "Beginner" },
+    last_login: Date,
   },
   { timestamps: true }
 );
