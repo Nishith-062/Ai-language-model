@@ -1,5 +1,5 @@
-import Session from "../models/Session.js";
 import axios from "axios";
+import ChatbotData from "../models/ChatbotData.js";
 import FormData from "form-data";
 
 const PYTHON_URL = 'http://127.0.0.1:8000' || "http://localhost:8000";
@@ -11,8 +11,6 @@ export const sendMessage = async (req, res) => {
 
     const formData = new FormData();
     formData.append("text", message); 
-    // console.log("Sending message to Python service:", message);
-    // console.log("Using PYTHON_URL:", formData);
 
     // Send form-data request
     const pythonResponse = await axios.post(`${PYTHON_URL}/chat/`, formData, {
@@ -20,13 +18,15 @@ export const sendMessage = async (req, res) => {
     });
     const aiResponse = pythonResponse.data;
 
+    // Save session to DB
+    const chatEntry = new ChatbotData({
+      userId,
+      userMessage: message,
+      aiResponse: aiResponse.corrected_text || aiResponse.response_text || aiResponse.transcription || "",
+    });
+    await chatEntry.save();
 
-    // let session = await Session.findOne({ userId }).sort({ _id: -1 });
-    // if (!session) session = new Session({ userId, messages: [] });
 
-    // session.messages.push({ sender: "user", text: message });
-    // session.messages.push({ sender: "ai", text: aiResponse });
-    // await session.save();
 
     res.status(200).json(aiResponse );
   } catch (err) {

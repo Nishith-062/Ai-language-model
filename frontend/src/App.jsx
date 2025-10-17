@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
@@ -8,8 +8,19 @@ import Home from "./pages/Home";
 import Progress from "./pages/Progress";
 import Settings from "./pages/Settings";
 import Exercise from "./pages/Exercise";
+import { useAuthStore } from "./store/useAuthStore";
+import { LoaderIcon } from "react-hot-toast";
+import { FaTruckLoading } from "react-icons/fa";
 
 function App() {
+  const {authUser,checkAuth,isCheckingAuth} = useAuthStore();
+  useEffect(() => {
+    checkAuth();
+  },[]
+)
+if (true){
+  return <div ><FaTruckLoading className="animate-spin"/></div>
+}
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
