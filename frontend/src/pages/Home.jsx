@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import SideBar from "../components/SideBar";
+import { BsRobot } from "react-icons/bs";
+import ChatBox from "../components/ChatBox";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div className="h-70">
+      {/* <SideBar/> */}
+    <ChatBox />
 
-export default Home
+
+    </div>
+  );
+};
+
+export default Home;

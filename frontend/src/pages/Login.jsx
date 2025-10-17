@@ -2,10 +2,12 @@ import React from "react";
 import { PiStarFourBold } from "react-icons/pi";
 import { IoPersonOutline } from "react-icons/io5";
 import { CiTrophy } from "react-icons/ci";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const navigate = useNavigate();
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
+    <div className="min-h-screen flex items-center justify-evenly bg-base-200">
       {/* Left Content */}
       <div className="flex flex-col max-w-xl space-y-6">
         <h1 className="text-5xl font-bold text-primary">Welcome Back!</h1>
@@ -80,12 +82,14 @@ const Login = () => {
           </label>
 
           <button className="btn btn-primary w-full mt-2">Login</button>
-
           <p className="text-center text-sm mt-3 text-base-content/70">
             Don’t have an account?{" "}
-            <a href="#" className="text-primary hover:underline">
+            <button
+              onClick={() => navigate("/signup")}
+              className="text-primary hover:underline"
+            >
               Sign up
-            </a>
+            </button>
           </p>
         </div>
       </div>
